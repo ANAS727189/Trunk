@@ -10,8 +10,8 @@ This project demonstrates the internal architecture of version control systems, 
 2. [Internal Data Structures](https://www.google.com/search?q=%23internal-data-structures)
 3. [Command Reference](https://www.google.com/search?q=%23command-reference)
 4. [Operational Workflows](https://www.google.com/search?q=%23operational-workflows)
-* [Method A: The Manual Lifecycle (Plumbing)](https://www.google.com/search?q=%23method-a-the-manual-lifecycle-plumbing)
-* [Method B: The Automated Lifecycle (Porcelain)](https://www.google.com/search?q=%23method-b-the-automated-lifecycle-porcelain)
+* [Method A: The Manual Lifecycle](https://www.google.com/search?q=%23method-a-the-manual-lifecycle-plumbing)
+* [Method B: The Automated Lifecycle](https://www.google.com/search?q=%23method-b-the-automated-lifecycle-porcelain)
 
 
 5. [Technical Specifications](https://www.google.com/search?q=%23technical-specifications)
@@ -83,7 +83,7 @@ committer <name> <timestamp>
 
 The Trunk binary exposes several subcommands categorized into "Plumbing" (low-level manipulation) and "Porcelain" (high-level user commands).
 
-### Plumbing Commands
+### Manual Commands
 
 These commands manipulate the internal database directly.
 
@@ -94,7 +94,7 @@ These commands manipulate the internal database directly.
 * **`commit-tree <tree-hash> -m <msg> [-p <parent>]`**: Creates a Commit object wrapper around a Tree. It requires a message and optionally accepts a parent commit hash to maintain history continuity.
 * **`read-tree <hash>`**: Reads a tree object (diagnostic use).
 
-### Porcelain Commands
+### Automatic Commands
 
 These commands automate the workflow for the end-user.
 
@@ -108,7 +108,7 @@ These commands automate the workflow for the end-user.
 
 There are two methods to persist changes using Trunk.
 
-### Method A: The Manual Lifecycle (Plumbing)
+### Method A: The Manual Lifecycle
 
 This method exposes the internal pipeline of Git. It requires the user to manually pass hash outputs from one step to the next.
 
@@ -149,7 +149,7 @@ echo <COMMIT_HASH_FROM_STEP_3> > .git/refs/heads/master
 
 ---
 
-### Method B: The Automated Lifecycle (Porcelain)
+### Method B: The Automated Lifecycle
 
 This method utilizes the high-level `commit` command to handle tree generation, parent resolution, and reference updates automatically.
 
