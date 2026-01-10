@@ -81,7 +81,7 @@ committer <name> <timestamp>
 
 ## Command Reference
 
-The Trunk binary exposes several subcommands categorized into "Plumbing" (low-level manipulation) and "Porcelain" (high-level user commands).
+The Trunk binary exposes several subcommands categorized into low-level manipulation and high-level user commands.
 
 ### Manual Commands
 
