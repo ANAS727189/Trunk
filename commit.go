@@ -8,8 +8,6 @@ import (
 )
 
 func gitCommit(message string) {
-	// 1. GET PARENT HASH (Current State)
-	// Read HEAD to see where we are pointing
 	headData, err := os.ReadFile(".git/HEAD")
 	if err != nil {
 		log.Fatal("Could not read HEAD:", err)

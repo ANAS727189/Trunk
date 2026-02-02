@@ -13,8 +13,6 @@ import (
 func commitTree(treeHash string, message string, parentHash string) string {
 
 	author := "Anas <anas@23boss.com>"
-	
-	// Get current time in seconds (Unix timestamp)
 	timestamp := time.Now().Unix()
 	timezone := "+0000" // Simplification
 	
@@ -28,21 +26,16 @@ func commitTree(treeHash string, message string, parentHash string) string {
 
 	commitContent := fmt.Sprintf("tree %s\n", treeHash)
 
-	// 2. Add Parent (IF it exists)
 	if parentHash != "" {
 		commitContent += fmt.Sprintf("parent %s\n", parentHash)
 	}
 	
 	commitContent += fmt.Sprintf("author %s %d %s\n", author, timestamp, timezone)
 	commitContent += fmt.Sprintf("committer %s %d %s\n", author, timestamp, timezone)
-	commitContent += "\n" // Blank line between headers and message
+	commitContent += "\n" 
 	commitContent += message
-	commitContent += "\n" // Good practice to end with newline
+	commitContent += "\n" 
 
-	// 2. Add Header & Save (Reuse logic)
-	// Theoretically, you should extract this "Save Object" logic into a helper function
-	// because you've written it 3 times now (Blob, Tree, Commit).
-	
 	data := []byte(commitContent)
 	header := fmt.Sprintf("commit %d\x00", len(data))
 	store := append([]byte(header), data...)
@@ -67,8 +60,6 @@ func commitTree(treeHash string, message string, parentHash string) string {
 	if err := os.WriteFile(dirPath+"/"+fileName, b.Bytes(), 0644); err != nil {
 		log.Fatal(err)
 	}
-
-	// // 3. Print the Commit Hash
 	// fmt.Println(commitHash)
 	
 	return commitHash

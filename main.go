@@ -65,12 +65,12 @@ func main() {
 				case "-p":
 					if i+1 < len(os.Args) {
 						parentHash = os.Args[i+1]
-						i++ // Skip the hash value in the next loop
+						i++ 
 					}
 				case "-m":
 					if i+1 < len(os.Args) {
 						message = os.Args[i+1]
-						i++ // Skip the message value in the next loop
+						i++ 
 					}
 				default:
 					fmt.Println("Error: Unknown argument", os.Args[i])

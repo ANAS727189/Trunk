@@ -10,23 +10,23 @@ import (
 )
 
 func updateIndex(filename string) {
-    // 1. Read Existing Index
+
     entries, _ := readIndex() 
     if entries == nil {
         entries = []IndexEntry{}
     }
 
-    // 2. Stat the new file
+
     info, err := os.Stat(filename)
     if err != nil {
         log.Fatal("File not found:", err)
     }
     stat := info.Sys().(*syscall.Stat_t)
 
-    // 3. Create Blob and Get Hash
+
     hashBytes := hashObject(filename)
 
-    // 4. Create the New Entry
+
     newEntry := IndexEntry{
         CtimeSec:  uint32(stat.Ctim.Sec),
         CtimeNano: uint32(stat.Ctim.Nsec),
@@ -43,8 +43,7 @@ func updateIndex(filename string) {
     }
     copy(newEntry.Hash[:], hashBytes)
 
-    // 5. Update or Append
-    // We check if the file is already in our list
+
     idx := -1
     for i, e := range entries {
         if e.Path == filename {
@@ -54,34 +53,32 @@ func updateIndex(filename string) {
     }
 
     if idx != -1 {
-        // Update existing entry
         entries[idx] = newEntry
     } else {
-        // Append new entry
         entries = append(entries, newEntry)
     }
 
-    // 6. SORT THE ENTRIES (Crucial for Git!)
+
     sort.Slice(entries, func(i, j int) bool {
         return entries[i].Path < entries[j].Path
     })
 
-    // 7. Write the Index File
+
     f, err := os.Create(".git/index")
     if err != nil {
         log.Fatal("Could not create index:", err)
     }
     defer f.Close()
 
-    // Write Header
+
     header := IndexHeader{
         Signature: [4]byte{'D', 'I', 'R', 'C'},
         Version:   2,
-        Entries:   uint32(len(entries)), // Now reflects total count
+        Entries:   uint32(len(entries)), 
     }
     binary.Write(f, binary.BigEndian, header)
 
-    // Write Entries
+
     for _, entry := range entries {
         binary.Write(f, binary.BigEndian, entry.CtimeSec)
         binary.Write(f, binary.BigEndian, entry.CtimeNano)
