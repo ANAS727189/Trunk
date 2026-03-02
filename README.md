@@ -4,7 +4,16 @@
 
 This project demonstrates the internal architecture of version control systems, specifically focusing on Content-Addressable Storage (CAS), Merkle Trees, and Directed Acyclic Graph (DAG) history management.
 
-[![Demo](https://img.youtube.com/vi/hCiXc9cTSXY/0.jpg)](https://www.youtube.com/watch?v=hCiXc9cTSXY)
+---
+## Demo
+
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=hCiXc9cTSXY">
+    <img src="https://img.youtube.com/vi/hCiXc9cTSXY/maxresdefault.jpg" width="80%">
+  </a>
+</p>
+
+---
 
 ## Table of Contents
 
